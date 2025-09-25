@@ -28,7 +28,7 @@ const Home = () => {
 
           <h1 className="mt-6 text-5xl font-extrabold leading-tight text-gray-900 animate__animated animate__fadeInUp animate__delay-2s">
             Boost Your{" "}
-            <span className="bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-500 to-blue-800 bg-clip-text text-transparent">
               Productivity
             </span>
             ,<br />
@@ -43,10 +43,10 @@ const Home = () => {
 
           {/* Buttons */}
           <div className="mt-8 flex justify-center space-x-4 animate__animated animate__fadeInUp animate__delay-4s">
-            <button className="px-6 py-3 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-700">
+            <button className="px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700">
               Get Started
             </button>
-            <button className="px-6 py-3 bg-white border border-gray-300 rounded-lg font-semibold text-purple-600 hover:bg-purple-50">
+            <button className="px-6 py-3 bg-white border border-gray-300 rounded-lg font-semibold text-blue-600 hover:bg-blue-50">
               Preview Platform
             </button>
           </div>

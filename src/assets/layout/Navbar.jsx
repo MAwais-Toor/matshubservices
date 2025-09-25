@@ -1,6 +1,6 @@
 // Navbar.jsx
 import React, { useState, useRef, useEffect } from "react";
-import { Package, Rocket, Building2, Crown } from "lucide-react"
+import { Package, Rocket, Building2, Crown, LayoutGrid } from "lucide-react"
 import { NavLink } from "react-router";
 import {
   Menu,
@@ -13,17 +13,13 @@ import {
   FileText,
   Users,
   Phone,
+  BookOpen,
+  HandCoins,
+  Mail,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-/**
- * Flowbase-style Navbar + Mega Menu (JSX)
- *
- * Dependencies:
- * npm i react-router-dom framer-motion lucide-react
- *
- * Requires TailwindCSS configured in your project.
- */
+
 
 const PRODUCT_ITEMS = [
   { title: "Components", subtitle: "UI building blocks", to: "/product/components", Icon: Code },
@@ -49,6 +45,7 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [megaOpen, setMegaOpen] = useState(false);
   const [servicesOpenMobile, setServicesOpenMobile] = useState(false);
+  const [leftSidebarOpen, setLeftSidebarOpen] = useState(false);
   const megaRef = useRef(null);
   const hoverTimer = useRef(null);
 
@@ -87,163 +84,204 @@ export default function Navbar() {
       {/* optional soft background shape (like your screenshot) */}
       <div className="absolute inset-x-0 -top-16 h-36 pointer-events-none bg-gradient-to-b from-violet-50 to-transparent" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="flex items-center justify-between h-16">
-          {/* left: logo + Club Access */}
-          <div className="flex items-center gap-4">
-            <NavLink to="/" className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-lg flex items-center justify-center font-semibold text-white bg-gradient-to-br from-purple-600 to-indigo-500 shadow-sm">
-                FB
+      <div className="sticky top-0 z-50 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="flex items-center justify-between h-16">
+
+            {/* Left Section */}
+            <div className="flex items-center gap-2">
+              {/* Mobile Sidebar Button */}
+              <div className="md:hidden">
+                <button
+                  onClick={() => setLeftSidebarOpen(true)}
+                  className="p-2 rounded-md hover:bg-slate-100 transition"
+                >
+                  <LayoutGrid className="w-6 h-6 text-slate-700" />
+                </button>
               </div>
-              <div>
-                <div className="text-slate-800 font-semibold">Flowbase</div>
-              </div>
-            </NavLink>
 
-            <button
-              type="button"
-              className="hidden sm:inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-600 text-white text-sm font-medium shadow-sm hover:scale-[0.995] transition"
-            >
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="opacity-90">
-                <path d="M12 2v20" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-              </svg>
-              Club Access
-            </button>
-          </div>
+              {/* Logo */}
+              <NavLink to="/" className="flex items-center gap-3">
+                <div className="w-40 flex items-center justify-center">
+                  <img className="max-w-full h-auto" src="/logo.png" alt="Logo" />
+                </div>
+              </NavLink>
 
-          {/* center nav */}
-          <nav className="hidden md:flex items-center gap-6">
-            <NavLink to="/explore" className="text-slate-700 hover:text-slate-900 transition">
-              Explore
-            </NavLink>
+            </div>
 
-            {/* Product (mega) */}
-            <div
-              className="relative"
-              onMouseEnter={openMegaWithDelay}
-              onMouseLeave={closeMegaWithDelay}
-            >
-              <button
-                onClick={() => setMegaOpen((s) => !s)}
-                aria-expanded={megaOpen}
-                className="flex items-center gap-1 text-slate-700 hover:text-slate-900 transition font-medium"
+            {/* Center Nav */}
+            <nav className="hidden md:flex items-center gap-8">
+              <NavLink
+                to="/explore"
+                className="text-slate-700 hover:text-slate-900 font-medium transition"
               >
-                Product
-                <ChevronDown className="w-4 h-4 text-slate-400" />
-              </button>
+                Explore
+              </NavLink>
 
-              {/* Mega menu */}
-              <AnimatePresence>
-                {megaOpen && (
-                  <motion.div
-                    ref={megaRef}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 10 }}
-                    transition={{ duration: 0.18 }}
-                    className="fixed left-1/2 bottom-0 -translate-x-1/2 mb-6 w-[900px] max-w-[calc(100vw-48px)] bg-white rounded-2xl shadow-2xl border border-slate-100 p-6 z-40"
-                    role="menu"
-                  >
-                    {/* top controls: centered pill */}
-                    <div className="flex items-center justify-center -mt-8 mb-3">
-                      <div className="px-3 py-1 rounded-full bg-slate-50 border border-slate-100 text-sm text-slate-700 shadow-sm">
-                        Browse 2,000+
-                      </div>
-                    </div>
+              {/* Product Mega Menu */}
+              <div
+                className="relative"
+                onMouseEnter={openMegaWithDelay}
+                onMouseLeave={closeMegaWithDelay}
+              >
+                <button
+                  onClick={() => setMegaOpen((s) => !s)}
+                  aria-expanded={megaOpen}
+                  className="flex items-center gap-1 text-slate-700 hover:text-slate-900 transition font-medium"
+                >
+                  Product
+                  <ChevronDown className="w-4 h-4 text-slate-400" />
+                </button>
 
-                    <div className="grid grid-cols-2 gap-6">
-                      {/* Left column: Product list */}
-                      <div>
-                        <div className="text-sm font-medium text-slate-900 mb-3">Product</div>
-                        <div className="grid grid-cols-2 gap-2">
-                          {PRODUCT_ITEMS.map((p) => (
-                            <NavLink
-                              key={p.title}
-                              to={p.to}
-                              className="flex items-start gap-3 p-2 rounded-lg hover:bg-slate-50 transition"
-                              role="menuitem"
-                            >
-                              <div className="w-9 h-9 rounded-md bg-slate-50 flex items-center justify-center">
-                                <p.Icon className="w-5 h-5 text-sky-500" />
-                              </div>
-                              <div>
-                                <div className="text-sm font-medium text-slate-800">{p.title}</div>
-                                <div className="text-xs text-slate-500">{p.subtitle}</div>
-                              </div>
-                            </NavLink>
-                          ))}
+                <AnimatePresence>
+                  {megaOpen && (
+                    <motion.div
+                      ref={megaRef}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute left-1/2 top-full mt-4 -translate-x-1/2 w-[900px] max-w-[calc(100vw-32px)] bg-white rounded-2xl shadow-xl border border-slate-100 p-6 z-40"
+                      role="menu"
+                    >
+                      {/* Top Badge */}
+                      <div className="flex items-center justify-center -mt-8 mb-3">
+                        <div className="px-3 py-1 rounded-full bg-slate-50 border border-slate-200 text-sm text-slate-700 shadow-sm">
+                          Browse 2,000+
                         </div>
                       </div>
 
-                      {/* Right column: Apps & Tools + CTA */}
-                      <div>
-                        <div className="flex items-center justify-between">
-                          <div className="text-sm font-medium text-slate-900">Apps & Tools</div>
-                          <NavLink
-                            to="/apps"
-                            className="text-xs text-sky-600 hover:underline"
-                          >
-                            View all
-                          </NavLink>
+                      <div className="grid grid-cols-2 gap-8">
+                        {/* Product list */}
+                        <div>
+                          <div className="text-sm font-semibold text-slate-900 mb-3">
+                            Product
+                          </div>
+                          <div className="grid grid-cols-2 gap-2">
+                            {PRODUCT_ITEMS.map((p) => (
+                              <NavLink
+                                key={p.title}
+                                to={p.to}
+                                className="flex items-start gap-3 p-2 rounded-lg hover:bg-slate-50 transition"
+                                role="menuitem"
+                              >
+                                <div className="w-9 h-9 rounded-md bg-slate-50 flex items-center justify-center shadow-sm">
+                                  <p.Icon className="w-5 h-5 text-sky-500" />
+                                </div>
+                                <div>
+                                  <div className="text-sm font-medium text-slate-800">
+                                    {p.title}
+                                  </div>
+                                  <div className="text-xs text-slate-500">
+                                    {p.subtitle}
+                                  </div>
+                                </div>
+                              </NavLink>
+                            ))}
+                          </div>
                         </div>
 
-                        <div className="mt-3 space-y-3">
-                          {APPS.map((a) => (
-                            <div key={a.name} className="flex items-center gap-3 p-2 rounded-lg hover:bg-slate-50 transition">
-                              {/* small rounded icon placeholder */}
-                              <div className={`w-10 h-10 rounded-md flex items-center justify-center ${a.tagBg}`}>
-                                <div className="w-6 h-6 rounded-full bg-white/70" />
-                              </div>
-                              <div>
-                                <div className="text-sm font-medium text-slate-800">{a.name}</div>
-                                <div className="text-xs text-slate-500">{a.meta}</div>
-                              </div>
+                        {/* Apps + CTA */}
+                        <div>
+                          <div className="flex items-center justify-between">
+                            <div className="text-sm font-semibold text-slate-900">
+                              Apps & Tools
                             </div>
-                          ))}
-                        </div>
+                            <NavLink
+                              to="/apps"
+                              className="text-xs text-sky-600 hover:underline"
+                            >
+                              View all
+                            </NavLink>
+                          </div>
 
-                        <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
-                          <div className="text-sm text-slate-600">Explore tailored solutions</div>
-                          <div className="flex gap-2">
-                            <NavLink to="/pricing" className="text-sm px-3 py-2 rounded-md bg-slate-50 border border-slate-100 text-slate-700 hover:bg-slate-100">
-                              Pricing
-                            </NavLink>
-                            <NavLink to="/contact" className="text-sm px-3 py-2 rounded-md bg-sky-600 text-white shadow-sm hover:bg-sky-700">
-                              Get a Quote
-                            </NavLink>
+                          <div className="mt-3 space-y-3">
+                            {APPS.map((a) => (
+                              <div
+                                key={a.name}
+                                className="flex items-center gap-3 p-2 rounded-lg hover:bg-slate-50 transition"
+                              >
+                                <div
+                                  className={`w-10 h-10 rounded-md flex items-center justify-center ${a.tagBg}`}
+                                >
+                                  <div className="w-6 h-6 rounded-full bg-white/70" />
+                                </div>
+                                <div>
+                                  <div className="text-sm font-medium text-slate-800">
+                                    {a.name}
+                                  </div>
+                                  <div className="text-xs text-slate-500">
+                                    {a.meta}
+                                  </div>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+
+                          <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                            <div className="text-sm text-slate-600">
+                              Explore tailored solutions
+                            </div>
+                            <div className="flex gap-2">
+                              <NavLink
+                                to="/pricing"
+                                className="text-sm px-3 py-2 rounded-md bg-slate-50 border border-slate-200 text-slate-700 hover:bg-slate-100"
+                              >
+                                Pricing
+                              </NavLink>
+                              <NavLink
+                                to="/contact"
+                                className="text-sm px-3 py-2 rounded-md bg-sky-600 text-white shadow hover:bg-sky-700"
+                              >
+                                Get a Quote
+                              </NavLink>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
 
-            <NavLink to="/resources" className="text-slate-700 hover:text-slate-900 transition">Resources</NavLink>
-            <NavLink to="/pricing" className="text-slate-700 hover:text-slate-900 transition">Pricing</NavLink>
-          </nav>
+              <NavLink
+                to="/resources"
+                className="text-slate-700 hover:text-slate-900 font-medium transition"
+              >
+                Resources
+              </NavLink>
+              <NavLink
+                to="/pricing"
+                className="text-slate-700 hover:text-slate-900 font-medium transition"
+              >
+                Pricing
+              </NavLink>
+            </nav>
 
-          {/* right: search + auth + mobile menu */}
-          <div className="flex items-center gap-3">
-            <div className="hidden md:flex items-center gap-3 border border-slate-100 rounded-full px-3 py-1">
-              <Search className="w-4 h-4 text-slate-400" />
-              <input className="w-44 text-sm placeholder:text-slate-400 outline-none" placeholder="Search components, tools..." />
-            </div>
+            {/* Right Section */}
+            <div className="flex items-center gap-4">
+              {/* Get Started Button */}
+              <NavLink
+                to="/get-started"
+                className="hidden md:inline-block text-sm px-4 py-2 rounded-full bg-gradient-to-r from-blue-500 to-blue-800 text-white shadow-md hover:shadow-lg hover:scale-[0.98] transition"
+              >
+                Get Started
+              </NavLink>
 
-            <div className="hidden sm:flex items-center gap-3">
-              <NavLink to="/login" className="text-sm text-slate-700 hover:underline">Login</NavLink>
-              <NavLink to="/signup" className="text-sm px-3 py-1 rounded-full border border-slate-200 bg-white shadow-sm hover:shadow-md">Sign up</NavLink>
-            </div>
-
-            <div className="md:hidden">
-              <button onClick={() => setMobileOpen(true)} className="p-2 rounded-md">
-                <Menu className="w-6 h-6 text-slate-700" />
-              </button>
+              {/* Mobile Menu */}
+              <div className="md:hidden">
+                <button
+                  onClick={() => setMobileOpen(true)}
+                  className="p-2 rounded-md hover:bg-slate-100 transition"
+                >
+                  <Menu className="w-6 h-6 text-slate-700" />
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
+
 
       {/* Mobile panel */}
       <AnimatePresence>
@@ -267,11 +305,16 @@ export default function Navbar() {
 
               {/* Header */}
               <div className="flex items-center justify-between p-6 ">
-                <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-purple-600 to-indigo-500 text-white flex items-center justify-center font-semibold">
-                    FB
+
+
+                <div className="flex items-center">
+                  <div className="w-35 flex items-center justify-center">
+                    <img
+                      src="/logo.png"
+                      alt="Logo"
+                      className="w-full h-full object-contain"
+                    />
                   </div>
-                  <div className="font-semibold">Flowbase</div>
                 </div>
                 <button onClick={() => setMobileOpen(false)} className="p-2">
                   <X className="w-5 h-5 text-slate-700" />
@@ -383,20 +426,7 @@ export default function Navbar() {
                   </div>
                 </div>
 
-                {/* Become a Partner Section */}
-                <div className="mt-6 p-4 rounded-xl border border-dashed border-sky-400 bg-sky-50 text-center">
-                  <h3 className="text-base font-semibold text-slate-800">Become a Partner</h3>
-                  <p className="text-xs text-slate-600 mt-1">
-                    Join our partner program and grow with us.
-                  </p>
-                  <NavLink
-                    to="/partner"
-                    onClick={() => setMobileOpen(false)}
-                    className="mt-3 inline-block px-4 py-2 rounded-full bg-sky-600 text-white text-sm font-medium hover:bg-sky-700 transition"
-                  >
-                    Get Started
-                  </NavLink>
-                </div>
+
                 {/* Social Icons Section */}
                 <div className="mt-8 border-t border-slate-200 pt-4 flex justify-center gap-4">
                   <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="w-9 h-9 flex items-center justify-center rounded-full bg-slate-100 hover:bg-sky-100 transition">
@@ -426,7 +456,7 @@ export default function Navbar() {
                 <NavLink
                   to="/signup"
                   onClick={() => setMobileOpen(false)}
-                  className="block w-full text-center px-4 py-2 rounded-full bg-sky-600 text-white hover:bg-sky-700 transition-colors"
+                  className="block w-full text-center px-4 py-2 rounded-full bg-blue-500 text-white hover:bg-blue-800 transition-colors"
                 >
                   Sign Up
                 </NavLink>
@@ -436,6 +466,170 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
+      {/* Left Sidebar (Mobile Only) */}
+      <AnimatePresence>
+        {leftSidebarOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50"
+          >
+            {/* Overlay */}
+            <motion.button
+              aria-label="close"
+              onClick={() => setLeftSidebarOpen(false)}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.45 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 bg-black"
+            />
+
+            {/* Sidebar */}
+            <motion.aside
+              initial={{ x: "-100%", opacity: 0, scale: 0.95 }}
+              animate={{ x: 0, opacity: 1, scale: 1 }}
+              exit={{ x: "-100%", opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.35, ease: "easeInOut" }}
+              className="absolute left-0 top-0 bottom-0 w-full sm:w-[380px] bg-white shadow-2xl flex flex-col rounded-r-2xl"
+            >
+              {/* Header */}
+              <div className="flex items-center justify-between p-6 border-b border-slate-200">
+                <div className="flex items-center">
+                  <div className="w-35 flex items-center justify-center">
+                    <img
+                      src="/logo.png"
+                      alt="Logo"
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
+                </div>
+                <button
+                  onClick={() => setLeftSidebarOpen(false)}
+                  className="p-2 rounded-full hover:bg-slate-100"
+                >
+                  <X className="w-5 h-5 text-slate-700" />
+                </button>
+              </div>
+
+              {/* Main Content */}
+              <nav className="flex-1 overflow-y-auto p-6 flex flex-col gap-10">
+                {/* Projects Section */}
+                <section>
+                  <h3 className="text-xs font-semibold text-slate-500 uppercase mb-4 tracking-wide">
+                    Our Projects
+                  </h3>
+                  <div className="grid grid-cols-2 gap-4">
+                    {/* MATsEdu */}
+                    <NavLink
+                      to="/matsedu"
+                      onClick={() => setLeftSidebarOpen(false)}
+                      className="group flex flex-col items-center justify-center p-4 rounded-xl border border-slate-200 hover:border-indigo-500 hover:shadow-lg transition bg-white"
+                    >
+                      <div className="w-11 h-11 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center group-hover:bg-indigo-600 group-hover:text-white transition">
+                        <BookOpen className="w-5 h-5" />
+                      </div>
+                      <span className="mt-2 text-sm font-medium text-slate-700 group-hover:text-indigo-600">
+                        MATsEdu
+                      </span>
+                    </NavLink>
+
+                    {/* MATsBrand */}
+                    <NavLink
+                      to="/matsbrand"
+                      onClick={() => setLeftSidebarOpen(false)}
+                      className="group flex flex-col items-center justify-center p-4 rounded-xl border border-slate-200 hover:border-purple-500 hover:shadow-lg transition bg-white"
+                    >
+                      <div className="w-11 h-11 rounded-lg bg-purple-100 text-purple-600 flex items-center justify-center group-hover:bg-purple-600 group-hover:text-white transition">
+                        <LayoutGrid className="w-5 h-5" />
+                      </div>
+                      <span className="mt-2 text-sm font-medium text-slate-700 group-hover:text-purple-600">
+                        MATsBrand
+                      </span>
+                    </NavLink>
+                  </div>
+                </section>
+
+                {/* Earn With Us */}
+                <section>
+                  <h3 className="text-xs font-semibold text-slate-500 uppercase mb-4 tracking-wide flex items-center gap-2">
+                    <HandCoins className="w-4 h-4 text-green-600" />
+                    Earn With Us
+                  </h3>
+                  <div className="grid grid-cols-3 gap-4">
+                    {Array(6)
+                      .fill(null)
+                      .map((_, idx) => (
+                        <div
+                          key={idx}
+                          className="overflow-hidden rounded-xl shadow-sm hover:shadow-lg transition bg-white"
+                        >
+                          <img
+                            src="https://raw.githubusercontent.com/Abdurrahman-Subh/mdx-blog/main/images/logo-fiverr.png"
+                            alt="Fiverr"
+                            className="w-full h-20 object-contain bg-gray-50 hover:scale-105 transition-transform"
+                          />
+                        </div>
+                      ))}
+                  </div>
+                </section>
+
+                {/* Become a Partner */}
+                <section className="p-5 rounded-xl border border-dashed border-sky-400 bg-sky-50 text-center shadow-sm">
+                  <h3 className="text-base font-semibold text-slate-800">
+                    Become a Partner
+                  </h3>
+                  <p className="text-xs text-slate-600 mt-1">
+                    Join our partner program and grow with us.
+                  </p>
+                  <NavLink
+                    to="/partner"
+                    onClick={() => setLeftSidebarOpen(false)}
+                    className="mt-3 inline-block px-4 py-2 rounded-full bg-sky-600 text-white text-sm font-medium hover:bg-sky-700 transition"
+                  >
+                    Get Started
+                  </NavLink>
+                </section>
+
+                {/* Contact Section */}
+                <section className="p-5 rounded-xl border border-slate-200 bg-gray-50 shadow-sm">
+                  <h3 className="text-base font-semibold text-slate-800 mb-3">
+                    Contact Us
+                  </h3>
+                  <div className="flex flex-col gap-3 text-sm text-slate-700">
+                    {/* Phone */}
+                    <a
+                      href="tel:03492006206"
+                      className="flex items-center gap-3 hover:text-indigo-600 transition"
+                    >
+                      <div className="w-9 h-9 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center shadow-sm">
+                        <Phone className="w-5 h-5" />
+                      </div>
+                      <span>0349 2006206</span>
+                    </a>
+
+                    {/* Email */}
+                    <a
+                      href="mailto:matshub.info@gmail.com"
+                      className="flex items-center gap-3 hover:text-indigo-600 transition"
+                    >
+                      <div className="w-9 h-9 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center shadow-sm">
+                        <Mail className="w-5 h-5" />
+                      </div>
+                      <span>matshub.info@gmail.com</span>
+                    </a>
+                  </div>
+                </section>
+              </nav>
+
+
+            </motion.aside>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+
+
     </header>
   );
 }
