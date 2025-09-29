@@ -7,6 +7,7 @@ import Footer from './assets/layout/Footer'
 import About from './assets/pages/About'
 import FloatingBtn from './assets/components/FloatingBtn'
 import TopBtn from './assets/components/TopBtn'
+import Chatbot from './assets/chatbot/Chatbot'
 
 
 
@@ -21,6 +22,7 @@ const App = () => {
     
     <FloatingBtn />
     <TopBtn />
+    <Chatbot />
     </>
   )
 }

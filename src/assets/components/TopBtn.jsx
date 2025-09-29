@@ -20,7 +20,7 @@ const TopBtn = () => {
     <div className="relative z-50">
       <button
         onClick={scrollToTop}
-        className={`fixed group bottom-6 right-6 rounded-full 
+        className={`fixed group bottom-30 right-6 rounded-full 
     bg-gradient-to-tr from-blue-500 via-blue-600 to-blue-700 text-white 
     shadow-lg transition-all duration-500 ease-in-out
     ${isVisible ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"} 
