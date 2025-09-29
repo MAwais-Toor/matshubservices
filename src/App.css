@@ -21,3 +21,22 @@
   animation: slow-ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
 
+/* about blocks */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+

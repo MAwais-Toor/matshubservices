@@ -7,38 +7,69 @@ import {
   X,
   ChevronDown,
   Search,
-  Code,
   Monitor,
-  Briefcase,
-  FileText,
-  Users,
   Phone,
   BookOpen,
   HandCoins,
   Mail,
+  Globe,
+  ShoppingCart,
+  Megaphone,
+  Palette,
+
+
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 
 
 const PRODUCT_ITEMS = [
-  { title: "Components", subtitle: "UI building blocks", to: "/product/components", Icon: Code },
-  { title: "Wireframes", subtitle: "Layouts & flows", to: "/product/wireframes", Icon: Monitor },
-  { title: "UI Elements", subtitle: "Buttons, inputs, etc.", to: "/product/ui-elements", Icon: Briefcase },
-  { title: "Freebies", subtitle: "Free templates & kits", to: "/product/freebies", Icon: FileText },
-  { title: "Boosters", subtitle: "Productivity plugins", to: "/product/boosters", Icon: Users },
-  { title: "Templates", subtitle: "Ready-to-use templates", to: "/product/templates", Icon: Phone },
+  {
+    title: "E-commerce",
+    subtitle: "Setup and manage your online store",
+    to: "/product/components",
+    Icon: ShoppingCart
+  },
+  {
+    title: "Facebook Page Creation",
+    subtitle: "Design and optimize your business page",
+    to: "/product/wireframes",
+    Icon: Monitor
+  },
+  {
+    title: "Facebook Ads & Marketing",
+    subtitle: "Run targeted ad campaigns effectively",
+    to: "/product/ui-elements",
+    Icon: Megaphone
+  },
+  {
+    title: "Digital Marketing",
+    subtitle: "Grow your brand with online strategies",
+    to: "/product/freebies",
+    Icon: Globe
+  },
+  {
+    title: "Posters & Logo Design",
+    subtitle: "Create impactful graphics & branding",
+    to: "/product/boosters",
+    Icon: Palette
+  },
+  {
+    title: "Google Ads",
+    subtitle: "Reach more customers with Google campaigns",
+    to: "/product/templates",
+    Icon: Search
+  },
 ];
 
 const APPS = [
   {
-    name: "Chrome Extension",
-    meta: "Over 15,000+ Downloads",
-    // In real project replace with small svg/img assets, here we just use a colored circle
-    tagBg: "bg-amber-100",
+    name: "MATsEdu",
+    meta: "750+ Students",
+    tagBg: "bg-indigo-100"
   },
-  { name: "Figma Plugin", meta: "Over 16,000+ Downloads", tagBg: "bg-sky-100" },
-  { name: "Chalk UI", meta: "World's largest UI system", tagBg: "bg-violet-100" },
+  { name: "MATsEarn", meta: "Join our program and earn rewards", tagBg: "bg-sky-100" },
+  { name: "MATsAffiliate", meta: "Promote our services and earn commissions", tagBg: "bg-violet-100" },
 ];
 
 export default function Navbar() {
@@ -112,10 +143,10 @@ export default function Navbar() {
             {/* Center Nav */}
             <nav className="hidden md:flex items-center gap-8">
               <NavLink
-                to="/explore"
+                to="/"
                 className="text-slate-700 hover:text-slate-900 font-medium transition"
               >
-                Explore
+                Home
               </NavLink>
 
               {/* Product Mega Menu */}
@@ -129,7 +160,7 @@ export default function Navbar() {
                   aria-expanded={megaOpen}
                   className="flex items-center gap-1 text-slate-700 hover:text-slate-900 transition font-medium"
                 >
-                  Product
+                  Features
                   <ChevronDown className="w-4 h-4 text-slate-400" />
                 </button>
 
@@ -147,15 +178,15 @@ export default function Navbar() {
                       {/* Top Badge */}
                       <div className="flex items-center justify-center -mt-8 mb-3">
                         <div className="px-3 py-1 rounded-full bg-slate-50 border border-slate-200 text-sm text-slate-700 shadow-sm">
-                          Browse 2,000+
+                        MATsHub Services
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-2 gap-8">
-                        {/* Product list */}
-                        <div>
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        {/* Product list (Left → 2/3) */}
+                        <div className="col-span-2">
                           <div className="text-sm font-semibold text-slate-900 mb-3">
-                            Product
+                            Features
                           </div>
                           <div className="grid grid-cols-2 gap-2">
                             {PRODUCT_ITEMS.map((p) => (
@@ -181,11 +212,11 @@ export default function Navbar() {
                           </div>
                         </div>
 
-                        {/* Apps + CTA */}
-                        <div>
+                        {/* Apps + CTA (Right → 1/3) */}
+                        <div className="col-span-1">
                           <div className="flex items-center justify-between">
                             <div className="text-sm font-semibold text-slate-900">
-                              Apps & Tools
+                              Other Programs
                             </div>
                             <NavLink
                               to="/apps"
@@ -218,7 +249,7 @@ export default function Navbar() {
                             ))}
                           </div>
 
-                          <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                          <div className="mt-6 pt-4 border-t border-slate-100 flex flex-col items-center gap-3">
                             <div className="text-sm text-slate-600">
                               Explore tailored solutions
                             </div>
@@ -237,8 +268,10 @@ export default function Navbar() {
                               </NavLink>
                             </div>
                           </div>
+
                         </div>
                       </div>
+
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -324,11 +357,11 @@ export default function Navbar() {
               {/* Nav Links (scrollable area) */}
               <nav className="flex-1 overflow-y-auto p-6 flex flex-col gap-3">
                 <NavLink
-                  to="/explore"
+                  to="/"
                   onClick={() => setMobileOpen(false)}
                   className="py-2 text-slate-700"
                 >
-                  Explore
+                  Home
                 </NavLink>
 
                 {/* Product dropdown */}
@@ -337,7 +370,7 @@ export default function Navbar() {
                     onClick={() => setServicesOpenMobile((s) => !s)}
                     className="w-full text-left flex items-center justify-between py-2 font-medium"
                   >
-                    Product
+                    Features
                     <ChevronDown
                       className={`w-4 h-4 transition-transform ${servicesOpenMobile ? "rotate-180" : ""
                         }`}

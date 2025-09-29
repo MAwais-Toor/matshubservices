@@ -18,7 +18,7 @@ const App = () => {
     <Footer />
 
     {/* other components */}
-    <About />
+    
     <FloatingBtn />
     <TopBtn />
     </>
