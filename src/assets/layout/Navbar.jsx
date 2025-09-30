@@ -276,7 +276,12 @@ export default function Navbar() {
                   )}
                 </AnimatePresence>
               </div>
-
+              <NavLink
+                to="/courses"
+                className="text-slate-700 hover:text-slate-900 font-medium transition"
+              >
+                Courses
+              </NavLink>
               <NavLink
                 to="/resources"
                 className="text-slate-700 hover:text-slate-900 font-medium transition"
@@ -289,13 +294,14 @@ export default function Navbar() {
               >
                 Pricing
               </NavLink>
+
             </nav>
 
             {/* Right Section */}
             <div className="flex items-center gap-4">
               {/* Get Started Button */}
               <NavLink
-                to="/get-started"
+                to="/getstarted"
                 className="hidden md:inline-block text-sm px-4 py-2 rounded-full bg-gradient-to-r from-blue-500 to-blue-800 text-white shadow-md hover:shadow-lg hover:scale-[0.98] transition"
               >
                 Get Started
@@ -409,7 +415,12 @@ export default function Navbar() {
                     )}
                   </AnimatePresence>
                 </div>
-
+                <NavLink
+                to="/courses"
+                  className="py-2 text-slate-700"
+                >
+                  Courses
+                </NavLink>
                 <NavLink
                   to="/resources"
                   onClick={() => setMobileOpen(false)}
@@ -487,7 +498,7 @@ export default function Navbar() {
               {/* Sticky Bottom CTA */}
               <div className="p-6 border-t border-slate-200">
                 <NavLink
-                  to="/signup"
+                  to="/getstarted"
                   onClick={() => setMobileOpen(false)}
                   className="block w-full text-center px-4 py-2 rounded-full bg-blue-500 text-white hover:bg-blue-800 transition-colors"
                 >
