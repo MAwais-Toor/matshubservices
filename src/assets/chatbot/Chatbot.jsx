@@ -73,7 +73,7 @@ export default function Chatbot() {
     return (
         <div>
             {/* Floating Toggle */}
-            
+
             <button
                 onClick={() => setIsOpen((prev) => !prev)}
                 className="fixed z-[9999] bottom-6 right-6 
@@ -91,10 +91,10 @@ export default function Chatbot() {
                 className={`fixed z-50 
     bottom-22 right-4 
     w-[80%] sm:w-96 max-w-sm
-    h-[26rem] sm:h-[32rem] 
+    max-h-[75dvh] sm:max-h-[85dvh] h-auto
     rounded-2xl 
     shadow-2xl overflow-hidden flex flex-col 
-    backdrop-blur-2xl bg-white/70 border border-blue-400/30 
+    backdrop-blur-2xl bg-white border border-blue-400/30 
     transition-all duration-500 transform 
     ${isOpen
                         ? "translate-y-0 opacity-100"
@@ -102,37 +102,41 @@ export default function Chatbot() {
                     }`}
             >
 
+
+
                 {/* Header */}
                 <div
-                    className="relative px-5 py-4 flex items-center gap-4 
-            bg-gradient-to-r from-blue-700 via-blue-600 to-blue-500 
-            backdrop-blur-xl border-b border-white/20 shadow-lg"
+                    className="relative px-4 sm:px-5 py-2 sm:py-3 flex items-center gap-3 sm:gap-4
+  bg-gradient-to-r from-blue-700 via-blue-600 to-blue-500 
+  backdrop-blur-xl border-b border-white/20 shadow-lg"
                 >
                     <div className="relative">
                         <div
                             className="absolute inset-0 rounded-full animate-ping 
-                bg-gradient-to-r from-blue-400 to-blue-300 opacity-50"
+      bg-gradient-to-r from-blue-400 to-blue-300 opacity-50"
                         ></div>
                         <img
                             src="https://i.ibb.co/6s1r9pC/bot.png"
                             alt="bot"
-                            className="w-12 h-12 sm:w-14 sm:h-14 relative z-10 rounded-full border-2 border-white shadow-md bg-white/20"
+                            className="w-10 h-10 sm:w-12 sm:h-12 relative z-10 rounded-full 
+      border-2 border-white shadow-md bg-white/20"
                         />
                     </div>
 
                     <div className="flex flex-col">
-                        <h2 className="text-lg sm:text-2xl font-bold tracking-wide text-white drop-shadow-sm">
+                        <h2 className="text-base sm:text-xl font-bold tracking-wide text-white drop-shadow-sm">
                             MATsBot
                         </h2>
-                        <p className="text-xs sm:text-sm text-blue-200 font-light">
+                        <p className="text-[11px] sm:text-sm text-blue-200 font-light">
                             Your AI Assistant
                         </p>
-                        <span className="text-green-400 text-[10px] sm:text-xs mt-1 flex items-center gap-1">
+                        <span className="text-green-400 text-[9px] sm:text-xs mt-1 flex items-center gap-1">
                             <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-                            Online
+                            Active Now
                         </span>
                     </div>
                 </div>
+
 
                 {/* Chat Container */}
                 <div
@@ -224,6 +228,11 @@ export default function Chatbot() {
           0%, 80%, 100% { transform: scale(0.8); opacity: 0.5; }
           40% { transform: scale(1); opacity: 1; }
         }
+          .chat-container {
+            flex: 1;
+            overflow-y: auto;
+          }
+
       `}</style>
         </div>
     );
