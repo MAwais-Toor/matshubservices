@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { MessageCircle, X, Send } from "lucide-react";
-import chatQA from "./chatQA"; // apni Q/A wali file import
+import chatQA from "./chatbot/index"; // apni Q/A wali file import
 
 export default function Chatbot() {
     const [isOpen, setIsOpen] = useState(false);
@@ -10,7 +10,7 @@ export default function Chatbot() {
 
     const chatContainerRef = useRef(null);
 
-    // === Auto Scroll Function ===
+    // === Auto Scroll ===
     const scrollToBottom = () => {
         if (chatContainerRef.current) {
             chatContainerRef.current.scrollTop =
@@ -22,18 +22,30 @@ export default function Chatbot() {
         scrollToBottom();
     }, [messages, typing]);
 
-    // === Answer Finder ===
+    // === Smart Answer Finder ===
     const findAnswer = (userMsg) => {
-        const lower = userMsg.toLowerCase();
-        for (let item of chatQA) {
-            for (let key of item.keywords) {
-                if (lower.includes(key)) return item.answer;
-            }
-        }
+        const input = userMsg.toLowerCase().trim();
+
+        // 1) Exact Match
+        const exactMatch = chatQA.find(item =>
+            item.keywords.some(keyword => input.includes(keyword.toLowerCase()))
+        );
+        if (exactMatch) return exactMatch.answer;
+
+        // 2) Fuzzy Match (70% keyword match)
+        const fuzzyMatch = chatQA.find(item =>
+            item.keywords.some(keyword => {
+                const word = keyword.toLowerCase();
+                return input.includes(word.slice(0, Math.floor(word.length * 0.7)));
+            })
+        );
+        if (fuzzyMatch) return fuzzyMatch.answer;
+
+        // 3) Default Reply
         return `Sorry, I don’t have info on that yet 🤔.<br>
-      <a href="https://wa.me/923001234567" target="_blank" class="text-blue-600 underline">
-        Chat with us on WhatsApp
-      </a>`;
+        <a href="https://wa.me/923001234567" target="_blank" class="text-blue-600 underline">
+          Chat with us on WhatsApp
+        </a>`;
     };
 
     // === Send Message ===
@@ -73,10 +85,9 @@ export default function Chatbot() {
     return (
         <div>
             {/* Floating Toggle */}
-
             <button
                 onClick={() => setIsOpen((prev) => !prev)}
-                className="fixed z-[9999] bottom-6 right-6 
+                className="fixed z-[40] bottom-6 right-6 
     p-2 sm:p-3 md:p-4 rounded-full 
     bg-gradient-to-r from-blue-700 via-blue-600 to-blue-500 
     text-white shadow-lg shadow-blue-300/40 
@@ -85,10 +96,9 @@ export default function Chatbot() {
                 {isOpen ? <X size={20} className="sm:w-6 sm:h-6" /> : <MessageCircle size={20} className="sm:w-6 sm:h-6" />}
             </button>
 
-
             {/* Chatbot */}
             <div
-                className={`fixed z-50 
+                className={`fixed z-40 
     bottom-22 right-4 
     w-[80%] sm:w-96 max-w-sm
     max-h-[75dvh] sm:max-h-[85dvh] h-auto
@@ -96,14 +106,9 @@ export default function Chatbot() {
     shadow-2xl overflow-hidden flex flex-col 
     backdrop-blur-2xl bg-white border border-blue-400/30 
     transition-all duration-500 transform 
-    ${isOpen
-                        ? "translate-y-0 opacity-100"
-                        : "translate-y-[120%] opacity-0 pointer-events-none"
+    ${isOpen ? "translate-y-0 opacity-100" : "translate-y-[120%] opacity-0 pointer-events-none"
                     }`}
             >
-
-
-
                 {/* Header */}
                 <div
                     className="relative px-4 sm:px-5 py-2 sm:py-3 flex items-center gap-3 sm:gap-4
@@ -136,7 +141,6 @@ export default function Chatbot() {
                         </span>
                     </div>
                 </div>
-
 
                 {/* Chat Container */}
                 <div
@@ -228,11 +232,6 @@ export default function Chatbot() {
           0%, 80%, 100% { transform: scale(0.8); opacity: 0.5; }
           40% { transform: scale(1); opacity: 1; }
         }
-          .chat-container {
-            flex: 1;
-            overflow-y: auto;
-          }
-
       `}</style>
         </div>
     );

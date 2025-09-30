@@ -17,7 +17,7 @@ const TopBtn = () => {
   };
 
   return (
-    <div className="relative z-50">
+    <div className="relative z-40">
       <button
         onClick={scrollToTop}
         className={`fixed group bottom-30 right-6 rounded-full 

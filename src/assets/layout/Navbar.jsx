@@ -178,7 +178,7 @@ export default function Navbar() {
                       {/* Top Badge */}
                       <div className="flex items-center justify-center -mt-8 mb-3">
                         <div className="px-3 py-1 rounded-full bg-slate-50 border border-slate-200 text-sm text-slate-700 shadow-sm">
-                        MATsHub Services
+                          MATsHub Services
                         </div>
                       </div>
 
@@ -337,7 +337,7 @@ export default function Navbar() {
             >
 
               {/* Header */}
-              <div className="flex items-center justify-between p-6 ">
+              <div className="flex items-center justify-between p-6 border-b border-slate-200">
 
 
                 <div className="flex items-center">
@@ -485,13 +485,13 @@ export default function Navbar() {
 
 
               {/* Sticky Bottom CTA */}
-              <div className="p-6 ">
+              <div className="p-6 border-t border-slate-200">
                 <NavLink
                   to="/signup"
                   onClick={() => setMobileOpen(false)}
                   className="block w-full text-center px-4 py-2 rounded-full bg-blue-500 text-white hover:bg-blue-800 transition-colors"
                 >
-                  Sign Up
+                  Get Started
                 </NavLink>
               </div>
             </motion.aside>
@@ -524,7 +524,7 @@ export default function Navbar() {
               animate={{ x: 0, opacity: 1, scale: 1 }}
               exit={{ x: "-100%", opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.35, ease: "easeInOut" }}
-              className="absolute left-0 top-0 bottom-0 w-full sm:w-[380px] bg-white shadow-2xl flex flex-col rounded-r-2xl"
+              className="fixed top-0 left-0 h-full w-full sm:w-[380px] bg-white shadow-2xl flex flex-col z-50 overflow-y-auto"
             >
               {/* Header */}
               <div className="flex items-center justify-between p-6 border-b border-slate-200">
