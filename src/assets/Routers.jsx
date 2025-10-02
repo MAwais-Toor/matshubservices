@@ -9,6 +9,7 @@ import Home from './pages/Home'
 // import NotFound from './pages/Notfound'
 
 import { createBrowserRouter } from 'react-router'
+import PreviewPlatform from './pages/PreviewPlatform'
 
 
 export const Routers = createBrowserRouter([
@@ -39,6 +40,10 @@ export const Routers = createBrowserRouter([
             {
                 path: "/getstarted",
                 element: <GetStartedBtn />
+            },
+            {
+                path: "/preview",
+                element: <PreviewPlatform />
             }
 
             // {

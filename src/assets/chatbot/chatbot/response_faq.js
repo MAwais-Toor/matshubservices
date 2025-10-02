@@ -12,9 +12,31 @@ const responses = [
     },
     {
         question: "MATsHub ka matlab kya hai?",
-        keywords: ["MATsHub means", "MATsHub ka mutlab", "MATsHub definition", "MATsHub meaning", "MATsHub kya hai"],
+        keywords: ["MATsHub means","matshub","mathub","mathhub", "MATsHub ka mutlab", "MATsHub definition", "MATsHub meaning", "MATsHub kya hai"],
         answer: "“MATsHub” stands for <i>Muhammad Awais Toor’s Hub</i>. It’s a central space that represents his ideas, activities, and professional journey — a hub of creativity, innovation, and growth."
     },
+    {
+  question: "Awais kon hai?",
+  keywords: [
+    "Awais kon hai",
+    "Muhammad Awais",
+    "Awais Toor",
+    "Awais kaun hai",
+    "MATsHub Founder",
+    "MATsHub CEO",
+    "MATsHub Owner",
+    "Awais Developer",
+    "Awais Web Developer",
+    "Muhammad Awais Toor",
+    "Awais",
+    "Who is Awais",
+    "Who is Muhammad Awais",
+    "Who is Awais Toor",
+    "toor"
+  ],
+  answer: "Muhammad Awais Toor is a highly skilled <b>Web Developer</b> and the <b>Founder & CEO of MATsHub</b>. He specializes in building modern web solutions, leading innovative digital projects, and driving growth through technology."
+},
+
     {
     question: "MATsHub ki professional services kya hain?",
     keywords: ["MATsHub services", "services", "service", "MATsHub kya karta hai", "MATsHub offerings", "services by MATsHub", "MATsHub business services"],

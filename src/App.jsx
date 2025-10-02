@@ -8,6 +8,7 @@ import About from './assets/pages/About'
 import FloatingBtn from './assets/components/FloatingBtn'
 import TopBtn from './assets/components/TopBtn'
 import Chatbot from './assets/chatbot/Chatbot'
+import Preloader from './assets/components/PreLoader'
 
 
 
@@ -23,6 +24,7 @@ const App = () => {
     <FloatingBtn />
     <TopBtn />
     <Chatbot />
+    <Preloader />
     </>
   )
 }

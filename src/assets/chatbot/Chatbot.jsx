@@ -163,13 +163,13 @@ export default function Chatbot() {
                             key={i}
                             className={`max-w-[80%] rounded-2xl shadow-sm break-words transition ${msg.sender === "user"
                                 ? "bg-gradient-to-r from-blue-500 via-blue-500 to-blue-600 text-white self-end px-4 py-2"
-                                : "bg-gradient-to-r from-gray-100 to-gray-200 self-start px-4 py-2"
+                                : "bg-gradient-to-r from-gray-100 to-gray-200 text-gray-600 self-start px-4 py-2"
                                 }`}
                         >
                             {msg.sender === "bot" ? (
                                 <div dangerouslySetInnerHTML={{ __html: msg.text }} />
                             ) : (
-                                <div>{msg.text}</div>
+                                <div >{msg.text}</div>
                             )}
                             <span className="block text-[10px] text-gray-400 mt-1">
                                 {msg.time}

@@ -7,6 +7,11 @@ import useState from 'react'
 import FaqsSection from '../components/FaqsSection'
 import CourseSection from '../components/CourseSection'
 import StateSection from '../components/StateSection'
+import TeamSection from '../components/TeamSection';
+import FeaturesSection from '../components/featuresSection';
+import WhyChooseUs from '../components/WhyChooseUs';
+import UniqueJourney from '../components/UniqueJourney';
+import { NavLink } from 'react-router';
 
 const Home = () => {
   return (
@@ -50,12 +55,12 @@ const Home = () => {
 
           {/* Buttons */}
           <div className="mt-8 flex justify-center space-x-4 animate__animated animate__fadeInUp animate__delay-4s">
-            <button className="px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700">
+            <NavLink to="/getstarted" className="px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700">
               Get Started
-            </button>
-            <button className="px-6 py-3 bg-white border border-gray-300 rounded-lg font-semibold text-blue-600 hover:bg-blue-50">
+            </NavLink>
+            <NavLink to="/preview" className="px-6 py-3 bg-white border border-gray-300 rounded-lg font-semibold text-blue-600 hover:bg-blue-50">
               Preview Platform
-            </button>
+            </NavLink>
           </div>
         </div>
 
@@ -141,12 +146,20 @@ const Home = () => {
       </section>
       {/* Services Section */}
       <Services />
+      {/* Features Section */}
+      <FeaturesSection />
       {/* Course Section */}
       <CourseSection />
       {/* FAQs Section */}
       <FaqsSection />
+      {/* Unique Section */}
+      <UniqueJourney />
       {/* State Section */}
       <StateSection />
+      {/* Team Section */}
+      <TeamSection />
+      {/* Why Choose Us Section */}
+      <WhyChooseUs />
 
     </div>
   )
