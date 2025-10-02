@@ -8,9 +8,9 @@ import FaqsSection from '../components/FaqsSection'
 import CourseSection from '../components/CourseSection'
 import StateSection from '../components/StateSection'
 import TeamSection from '../components/TeamSection';
-import FeaturesSection from '../components/featuresSection';
 import WhyChooseUs from '../components/WhyChooseUs';
 import UniqueJourney from '../components/UniqueJourney';
+import FeatureSection from '../components/FeatureSection';
 import { NavLink } from 'react-router';
 
 const Home = () => {
@@ -147,7 +147,7 @@ const Home = () => {
       {/* Services Section */}
       <Services />
       {/* Features Section */}
-      <FeaturesSection />
+      <FeatureSection />
       {/* Course Section */}
       <CourseSection />
       {/* FAQs Section */}

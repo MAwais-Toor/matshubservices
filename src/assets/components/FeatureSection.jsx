@@ -1,6 +1,6 @@
 import { ShoppingBag, Facebook, Megaphone, Globe, Image, Search } from "lucide-react";
 
-export default function FeaturesSection() {
+export default function FeatureSection() {
   const features = [
     {
       title: "E-commerce",
